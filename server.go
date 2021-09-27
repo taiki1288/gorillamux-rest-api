@@ -10,9 +10,9 @@ import (
 
 func main() {
 	router := mux.NewRouter();
-	const port string ":8080"
+	const port string = ":8080"
 	router.HandleFunc("/", func(resp http.ResponseWriter, req *http.Request) {
-		fmt.Fprintln(resp, "Up and running")
+		fmt.Fprintln(resp, "Up and running...")
 	})
 	log.Println("Server listening on port")
 	log.Println(http.ListenAndServe(port, router))
