@@ -32,6 +32,7 @@ func getPosts(resp http.ResponseWriter, req *http.Request) {
 }
 
 func addPost(resp http.ResponseWriter, req *http.Request) {
+	resp.Header().Set("Content-type", "application/json")
 	var post Post
 	err := json.NewDecoder(req.Body).Decode(&post)
 	if err  != nil {
@@ -42,6 +43,6 @@ func addPost(resp http.ResponseWriter, req *http.Request) {
 	post.Id = len(posts) + 1
 	posts = append(posts, post)
 	resp.WriteHeader(http.StatusOK)
-	result , err := json.Marshal(post)
+	result, err := json.Marshal(post)
 	resp.Write(result)
 }
