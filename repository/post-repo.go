@@ -9,3 +9,9 @@ type PostRepository interface {
 	FindAll() ([]entity.Post, error)
 	// entityフォルダの構造体をアクセスしている。
 }
+
+type repo struct {}
+
+func NewPostRepository() PostRepository {
+	return &repo{}
+}
