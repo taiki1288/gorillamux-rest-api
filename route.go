@@ -11,16 +11,15 @@ var (
 	repo repository.PostRepository = repository.NewPostRepository()
 )
 
-func getPosts(resp http.ResponseWriter, req *http.Request) {
-	resp.Header().Set("Content-type", "application/json")
-	result, err := json.Marshal(posts)
+func getPosts(response http.ResponseWriter, request *http.Request) {
+	response.Header().Set("Content-type", "application/json")
+	posts, err := repo.FindAll()
 	if err  != nil {
-		resp.WriteHeader(http.StatusInternalServerError)
-		resp.Write([]byte(`{"error": "Error marshalling the posts array"}`))
-		return 
+		response.WriteHeader(http.StatusInternalServerError)
+		response.Write([]byte(`{"error": "Error getting the posts"}`)) 
 	}
-	resp.WriteHeader(http.StatusOK)
-	resp.Write(result)
+	response.WriteHeader(http.StatusOK)
+	json.NewEncoder(response).Encode(posts)
 }
 
 func addPost(resp http.ResponseWriter, req *http.Request) {
