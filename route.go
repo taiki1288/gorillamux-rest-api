@@ -3,15 +3,13 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+
+	"./repository"
 )
 
 var (
-	posts []Post
+	repo repository.PostRepository = repository.NewPostRepository()
 )
-
-func init() {
-	posts = []Post{Post{Id: 1, Title: "Title 1", Text: "Text 1"}}
-}
 
 func getPosts(resp http.ResponseWriter, req *http.Request) {
 	resp.Header().Set("Content-type", "application/json")

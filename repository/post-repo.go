@@ -3,10 +3,10 @@ package repository
 import (
 	"context"
 	"log"
-	"strings"
+	// "strings"
 
 	"../entity"
-	"google.golang.org/api/iterator"
+	// "google.golang.org/api/iterator"
 
 	"cloud.google.com/go/firestore"
 )
@@ -61,7 +61,7 @@ func (*repo) FindAll() ([]entity.Post, error) {
 	defer client.Close()
 
 	var posts []entity.Post
-	
+
 	iterator := client.Collection(collectionName).Documents(ctx)
 	for {
 		doc, err := iterator.Next()
